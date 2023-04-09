@@ -11,7 +11,7 @@ Responsive design for desktop and mobile devices
 
 To run Task-Manager locally, follow these steps:
 
-- Clone the repository: git clone https://github.com/your-username/task-manager.git
+- Clone the repository: git clone https://github.com/pips90/task-manager1.git
 - Navigate to the project directory: cd task-manager
 - Install dependencies: npm install
 - Start the development server: npm start
