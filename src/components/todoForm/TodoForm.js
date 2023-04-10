@@ -3,6 +3,8 @@ import { addTodo } from "../../slices/todosSlice";
 import TodoList from "../todoList/TodoList";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
+import Button from "react-bootstrap/Button";
+import { Card, Form } from "react-bootstrap";
 
 const TodoForm = () => {
   const dispatch = useDispatch();
@@ -32,21 +34,30 @@ const TodoForm = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={addTask}>
-        <input
-          onChange={onTaskValueChange}
-          value={taskValue}
-          name="taskName"
-          placeholder="add your todo"
-        />
-        <button type="submit">add</button>
-      </form>
+    <Card style={{ width: "25rem", margin: "auto" }}>
+      <Form onSubmit={addTask}>
+        <div>
+          <Form.Control
+            onChange={onTaskValueChange}
+            value={taskValue}
+            name="taskName"
+            placeholder="add your todo"
+            className="w-50 mx-auto"
+          />
+        </div>
+
+        {/* <button type="submit">add</button> */}
+        <div className="d-flex justify-content-center mx-auto">
+          <Button type="submit" className="w-50">
+            add
+          </Button>
+        </div>
+      </Form>
       <div>
         {/* this is what shows the user the todos/tasks */}
         <TodoList />
       </div>
-    </div>
+    </Card>
   );
 };
 

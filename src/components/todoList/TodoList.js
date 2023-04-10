@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { updateTodo, deleteTodo } from "../../slices/todosSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Card, Form } from "react-bootstrap";
 
 const TodoList = () => {
   const editedTodoInitState = {
@@ -13,9 +14,11 @@ const TodoList = () => {
 
   const [selectedTodo, setSelectedTodo] = useState({});
   const [editedTodo, setEditedTodo] = useState(editedTodoInitState);
+  const [isVisible, setIsVisible] = useState("invisible");
 
   const selectTodo = (todo) => {
     setSelectedTodo(todo);
+    setIsVisible("visible");
     setEditedTodo({
       ...editedTodo,
       id: todo.id,
@@ -33,17 +36,24 @@ const TodoList = () => {
   };
 
   return (
-    <div>
-      {<h1>todo list</h1>}
+    <Form>
+      {<h5 className="text-center">Task List</h5>}
       {todoList.map((todo) => (
-        <div key={todo.id}>
+        <Card
+          key={todo.id}
+          className="d-flex justify-content-center mx-auto w-50"
+        >
           <p>{todo.title}</p>
-          {<button onClick={() => selectTodo(todo)}>select</button>}
-        </div>
+          {
+            <Button onClick={() => selectTodo(todo)} className="w-50">
+              select
+            </Button>
+          }
+        </Card>
       ))}
       {selectedTodo && (
-        <div>
-          <input
+        <div className={isVisible}>
+          <Form.Control
             type="text"
             value={editedTodo.title}
             onChange={(e) =>
@@ -52,12 +62,20 @@ const TodoList = () => {
                 title: e.target.value,
               })
             }
+            className="w-50 mx-auto"
           />
-          <button onClick={handleEdit}>Edit</button>
-          <button onClick={handleDelete}>Delete</button>
+          <div className="d-flex justify-content-center mx-auto">
+            <Button onClick={handleEdit} className="w-25">
+              Edit
+            </Button>{" "}
+            {""}
+            <Button onClick={handleDelete} className="w-25">
+              Delete
+            </Button>
+          </div>
         </div>
       )}
-    </div>
+    </Form>
   );
 };
 
