@@ -28,11 +28,13 @@ const TodoList = () => {
 
   const handleEdit = () => {
     dispatch(updateTodo(editedTodo));
+    setIsVisible("invisible");
   };
 
   const handleDelete = () => {
     dispatch(deleteTodo(editedTodo));
     setEditedTodo(editedTodoInitState);
+    setIsVisible("invisible");
   };
 
   return (
