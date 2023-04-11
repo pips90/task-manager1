@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { updateTodo, deleteTodo } from "../../slices/todosSlice";
+import { useEffect, useState } from "react";
+import { updateTodo, deleteTodo, getTodos } from "../../slices/todosSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, Form } from "react-bootstrap";
 
@@ -11,6 +11,7 @@ const TodoList = () => {
 
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.todos.todoList);
+  // const isFetching = useSelector((state) => state.todos.isFetching);
 
   const [selectedTodo, setSelectedTodo] = useState({});
   const [editedTodo, setEditedTodo] = useState(editedTodoInitState);
@@ -26,13 +27,17 @@ const TodoList = () => {
     });
   };
 
+  useEffect(() => {
+    dispatch(getTodos());
+  }, []);
+
   const handleEdit = () => {
     dispatch(updateTodo(editedTodo));
     setIsVisible("invisible");
   };
 
   const handleDelete = () => {
-    dispatch(deleteTodo(editedTodo));
+    dispatch(deleteTodo(editedTodo.id));
     setEditedTodo(editedTodoInitState);
     setIsVisible("invisible");
   };
