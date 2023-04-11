@@ -41,6 +41,29 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (newTodo) => {
   }
 });
 
+export const editTodo = createAsyncThunk(
+  "todos/editTodo",
+  async (updatedTodo) => {
+    try {
+      const { id, title } = updatedTodo;
+      const response = await fetch(`http://localhost:5000/todos/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to edit todo");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return isRejectedWithValue("Failed to edit todo");
+    }
+  }
+);
+
 export const deleteTodo = createAsyncThunk(
   "todos/deleteTodo",
   async (todoId) => {
@@ -102,12 +125,21 @@ const todosSlice = createSlice({
       .addCase(deleteTodo.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(editTodo.fulfilled, (state, action) => {
+        const { id, title } = action.payload;
+        state.todoList = state.todoList.map((todo) => {
+          if (todo.id === id) {
+            return { ...todo, title: title };
+          }
+          return todo;
+        });
       });
   },
 });
 
 // Extract the action creators from the slice and export them
-export const { updateTodo } = todosSlice.actions;
+export const {} = todosSlice.actions;
 
 // Export the reducer function from the slice
 export default todosSlice.reducer;

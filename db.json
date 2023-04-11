@@ -1,3 +1,8 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "title": "get groceries",
+      "id": "f7d49db4-5e79-4775-81b6-d6009406660f"
+    }
+  ]
 }

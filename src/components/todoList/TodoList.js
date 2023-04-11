@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { updateTodo, deleteTodo, getTodos } from "../../slices/todosSlice";
+import { editTodo, deleteTodo, getTodos } from "../../slices/todosSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, Form } from "react-bootstrap";
 
@@ -32,7 +32,7 @@ const TodoList = () => {
   }, []);
 
   const handleEdit = () => {
-    dispatch(updateTodo(editedTodo));
+    dispatch(editTodo(editedTodo));
     setIsVisible("invisible");
   };
 
