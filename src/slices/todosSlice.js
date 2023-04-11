@@ -88,14 +88,7 @@ const todosSlice = createSlice({
   initialState,
 
   reducers: {
-    // updateTodo: (state, action) => {
-    //   console.log(action.payload);
-    //   state.todoList.map((todo) => {
-    //     if (todo.id === action.payload.id) {
-    //       todo.title = action.payload.title;
-    //     }
-    //     return state;
-    //   });
+    // reducers go in here.
   },
   // Define extra reducers for handling async actions
   extraReducers: (builder) => {
@@ -139,7 +132,7 @@ const todosSlice = createSlice({
 });
 
 // Extract the action creators from the slice and export them
-export const {} = todosSlice.actions;
+// export const {} = todosSlice.actions;
 
 // Export the reducer function from the slice
 export default todosSlice.reducer;

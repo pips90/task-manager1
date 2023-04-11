@@ -14,7 +14,6 @@ const TodoForm = () => {
     // Track input changes
     const taskValue = event.target.value;
     setTaskValue(taskValue);
-    console.log(taskValue);
   };
 
   const createTodo = () => {
@@ -28,7 +27,6 @@ const TodoForm = () => {
     // add the task
     event.preventDefault();
     const todo = createTodo();
-    console.log(todo);
     dispatch(addTodo(todo));
     setTaskValue("");
   };
